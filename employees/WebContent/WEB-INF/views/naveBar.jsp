@@ -18,18 +18,23 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <meta charset="UTF-8">
 </head>
 <body>
+	<hr>
 	<ul class="nav">
 		<li class="nav-item">
 	   		<a class="nav-link text-dark" href="${pageContext.request.contextPath}/"><b class="font-italic">HOME</b> </a>
 	  	</li>
 	  <li class="nav-item">
 	   <a class="text-success nav-link" href="${pageContext.request.contextPath}/employees/GetEmployeesListServlet"><b>사원</b> 조회</a>
+	   <small>
+		   <a href="${pageContext.request.contextPath}/employees/GetEmployeesListOrderBy?order=asc">오름차순</a>
+		   <a href="${pageContext.request.contextPath}/employees/GetEmployeesListOrderBy?order=desc">내림차순</a>
+	   </small>
 	  </li>
 	  <li class="nav-item">
 	    <a class="text-primary nav-link" href="${pageContext.request.contextPath}/departments/GetDepartmentsListServlet"><b>부서</b> 조회</a>
 	  </li>
 	  <li class="nav-item">
-	     <a class="nav-link disabled" href="#">부서 조회</a>
+	    <a class="nav-link disabled" href="#">부서사원 조회</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link disabled" href="#">부장 조회</a>
@@ -41,8 +46,9 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	    <a class="nav-link disabled" href="#">연봉 조회</a>
 	  </li>
 	  <li class="nav-item">
-	  	<a class="nav-link disabled font-italic text-secondary small">구현 예정 항목 OFF 상태</a>
+	  	<a class="nav-link disabled font-italic text-secondary small">구현 예정 항목 OFF상태</a>
 	  </li>	  
 	</ul>
+	<hr>
 </body>
 </html>
