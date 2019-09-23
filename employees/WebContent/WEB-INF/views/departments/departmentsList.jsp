@@ -25,9 +25,9 @@
 	</div>
 </div>
 <div class="container">
-	<hr>
+
 	<jsp:include page="../naveBar.jsp"></jsp:include>	
-	<hr>
+
 	<table class="table table-bordered table-hover table-striped"  style="text-align:center;">
 	<thead>
 		<tr>

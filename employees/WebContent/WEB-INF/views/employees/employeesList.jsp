@@ -24,10 +24,11 @@
 	  	<p>employees 샘플 데이터베이스를 사용하여 구현한 웹 프로젝트의 <b class="display-4 font-weight-bold text-success">사원조회</b> 페이지입니다.</p>
 	</div>
 </div>
+
 <div class="container">
-	<hr>
+
 	<jsp:include page="../naveBar.jsp"></jsp:include>	
-	<hr>
+
 	<h4>선택한 개수만큼 출력</h4>	
 	<form action="${pageContext.request.contextPath}/employees/GetEmployeesListServlet" method="get">
 		<!-- 출력 개수 제한 선택 -->
