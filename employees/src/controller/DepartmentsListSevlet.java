@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.DepartmentDao;
+import model.DepartmentsDao;
 import vo.Department;
 
 
@@ -21,7 +21,7 @@ public class DepartmentsListSevlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("::: DepartmentsListSevlet 실행 :::");
 		
-		DepartmentDao departmentDao = new DepartmentDao();
+		DepartmentsDao departmentDao = new DepartmentsDao();
 		List<Department> list = departmentDao.selectDepartmentsList();
 		
 		request.setAttribute("list", list);

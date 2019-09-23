@@ -31,9 +31,49 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	<hr>
 	<div>
 		<b>표현식 --></b> employees total row count: <%= request.getAttribute("employeesRowCount") %><br>
-		<b>EL표현식 --></b> employee table row count : ${employeesRowCount}	;
-	<hr>
+		<b>EL표현식 --></b> employee table row count : ${employeesRowCount};
+
 	<jsp:include page="./naveBar.jsp"></jsp:include>	
+
+	<h4><b>테이블 정보 </b></h4>
+  	<div>
+  		<table class="table table-bordered table-hover"  style="text-align:center;">
+  			<thead>
+	  			<tr>
+	  				<th>테이블 이름</th>
+	  				<th>데이터 개수</th>
+	  			</tr>
+  			</thead>
+  			<tbody>
+  				<tr>
+  					<td>departments</td>
+	  				<td>${departmentsRowCount}</td>	  				
+  				</tr>
+  				<tr>
+  					<td>employees</td>
+	  				<td>${employeesRowCount}</td>	  				
+  				</tr>
+  				<tr>
+  					<td>titles</td>
+	  				<td>${titlesRowCount}</td>	  				
+  				</tr>
+  				<tr>
+  					<td>emp_manger</td>
+	  				<td>${deptManagerRowCount}</td>	  				
+  				</tr>
+  				<tr>
+  					<td>dept_emp</td>
+	  				<td>${deptEmpRowCount}</td>	  			
+	  					
+  				</tr>
+  				<tr>
+  					<td>salaries</td>
+	  				<td>${salariesRowCount}</td>	  				
+  				</tr>
+  			</tbody>
+  		</table>
+  	
+  	</div>
 	</div>
 </div>
 </body>
