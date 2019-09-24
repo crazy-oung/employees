@@ -24,20 +24,23 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	   		<a class="nav-link text-dark" href="${pageContext.request.contextPath}/"><b>HOME</b> </a>
 	  	</li>
 	  <li class="nav-item">
-	   <a class="text-success nav-link" href="${pageContext.request.contextPath}/employees/GetEmployeesList"><b>사원</b>조회</a>
+	   <a class="text-success nav-link" href="${pageContext.request.contextPath}/employees/getEmployeesList"><b>사원</b>조회</a>
 	   <small>
-		   <a href="${pageContext.request.contextPath}/employees/GetEmployeesListOrderBy?order=asc">오름차순</a>
-		   <a href="${pageContext.request.contextPath}/employees/GetEmployeesListOrderBy?order=desc">내림차순</a>
+		   <a href="${pageContext.request.contextPath}/employees/getEmployeesListOrderBy?order=asc">오름차순</a>
+		   <a href="${pageContext.request.contextPath}/employees/getEmployeesListOrderBy?order=desc">내림차순</a>
 	   </small>
 	  </li>
 	  <li class="nav-item">
-	    <a class="text-primary nav-link" href="${pageContext.request.contextPath}/departments/GetDepartmentsList"><b>부서</b>조회</a>
+	    <a class="text-primary nav-link" href="${pageContext.request.contextPath}/departments/getDepartmentsList"><b>부서</b>조회</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="text-danger nav-link" href="${pageContext.request.contextPath}/titles/titlesListDistinct"><b>직책</b>조회</a>
+	    <a class="text-danger nav-link" href="${pageContext.request.contextPath}/titles/getTitlesListDistinct"><b>직책</b>조회</a>
 	  </li>
 	  <li class="nav-item">
-	    <a class="nav-link disabled" href="#">부서사원조회</a>
+	    <a class="nav-link text-info" href="${pageContext.request.contextPath}/departments/getDepartmentsCountByDeptNo"><b>부서사원</b>조회</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link text-success" href="${pageContext.request.contextPath}/employees/getEmployeesCountByGender"><b>성별</b>사원조회</a>
 	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link disabled" href="#">부장조회</a>
