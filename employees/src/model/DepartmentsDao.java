@@ -5,14 +5,47 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import db.DBHelper;
 import vo.Department;
 
 public class DepartmentsDao {
 	
+	// 부서별 사원수를 알려주는 메소드
+	public List<Map<String, Object>> selectDepartmentsCountByDeptNo(){
+		System.out.println("::: selectDepartmentsCountByDeptNo 실행 :::");
+      List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+      Connection conn = null;
+      PreparedStatement stmt = null;
+      ResultSet rs = null;
+      final String sql =
+      "SELECT d.dept_no, d.dept_name, COUNT(d.dept_no) FROM dept_emp de INNER join departments d "
+      + "ON de.dept_no = d.dept_no WHERE de.to_date = '9999-01-01' GROUP BY de.dept_no ORDER BY COUNT(d.dept_no) desc";
+      
+      try {
+         conn = DBHelper.getConnection();
+         stmt =conn.prepareStatement(sql);
+         rs = stmt.executeQuery();
+         while(rs.next()) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("deptNo",rs.getString("d.dept_no"));
+            map.put("deptName",rs.getString("d.dept_name"));
+            map.put("deptCount", rs.getString("COUNT(d.dept_no)"));
+            list.add(map);
+         }
+      }   catch   (Exception e){
+      }   finally   {
+         DBHelper.close(rs, stmt, conn);
+      }
+      return list;
+   }
+	
 	// 부서테이블의  데이터 개수를 가져오는 메소드
-	public int selectDepartmentsRowCount() {		
+	public int selectDepartmentsRowCount() {	
+		System.out.println("::: selectDepartmentsRowCount 실행 :::");
 		// 수를 저장하여 반환 할 변수 
 		int count = 0;
 		// 쿼리 작성 
