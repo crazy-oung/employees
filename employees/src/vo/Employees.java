@@ -3,8 +3,8 @@ package vo;
 public class Employees {
 	//번호, 성, 이름, 성별, 생일 , 입사일
 	private int empNo;
-	private String empLastName;	
-	private String empFirstName;
+	private String lastName;	
+	private String firstName;
 	private String birthDate;
 	private String hireDate;
 	private String gender;
@@ -12,7 +12,7 @@ public class Employees {
 
 	@Override
 	public String toString() {
-		return "Employees [empNo=" + empNo + ", empLastName=" + empLastName + ", empFirstName=" + empFirstName
+		return "Employees [empNo=" + empNo + ", empLastName=" + lastName + ", empFirstName=" + firstName
 				+ ", birthDate=" + birthDate + ", gender=" + gender + "]";
 	}
 	
@@ -29,17 +29,17 @@ public class Employees {
 	public void setEmpNo(int empNo) {
 		this.empNo = empNo;
 	}
-	public String getEmpLastName() {
-		return empLastName;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setEmpLastName(String empLastName) {
-		this.empLastName = empLastName;
+	public void setLastName(String empLastName) {
+		this.lastName = empLastName;
 	}
-	public String getEmpFirstName() {
-		return empFirstName;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setEmpFirstName(String empFirstName) {
-		this.empFirstName = empFirstName;
+	public void setFirstName(String empFirstName) {
+		this.firstName = empFirstName;
 	}
 	public String getBirthDate() {
 		return birthDate;
