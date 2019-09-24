@@ -27,15 +27,28 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 </div>
 
 <div class="container">
-	<hr>
+
+	<jsp:include page="./naveBar.jsp"></jsp:include>	
+	
 	<div>
 		<b>표현식 --></b> employees total row count: <%= request.getAttribute("employeesRowCount") %><br>
 		<b>EL표현식 --></b> employee table row count : ${employeesRowCount};
-
-	<jsp:include page="./naveBar.jsp"></jsp:include>	
-
+	<hr>
+	<!-- 사원 목록 출력 할 때 조건 검색 -->
+	<div>
+		<!-- between ... and ... -->
+		<h5><b>사원 검색</b> <small>(10001~499999)</small></h5>
+		<form method = "get" action = "${pageContext.request.contextPath}/employees/getEmployeesListBetween">
+		<div class="d-flex">
+			<input type = "number" name = "begin" class="form-control" placeholder="시작 번호">
+			<b class="h4">&nbsp;~&nbsp;</b>
+			<input type = "number" name = "end" class="form-control" placeholder="끝 번호">
+			<button type = "submit" class="btn btn-primary" style="width: 10%">검색</button>			 
+		</div>
+		</form>
+	</div>
+	<hr>
 	<h4><b>테이블 정보 </b></h4>
-  	<div>
   		<table class="table table-bordered table-hover"  style="text-align:center;">
   			<thead>
 	  			<tr>
@@ -73,7 +86,8 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
   		</table>
   	
   	</div>
-	</div>
+	<hr>	
+	
 </div>
 </body>
 </html>

@@ -5,13 +5,103 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import db.DBHelper;
 import vo.Employees;
 
 public class EmployeesDao {
 	
-	
+	 // 사원의 최대 갯수를 구하는 메소드
+	   public int selectEmpNo(String str) {
+		   System.out.println("::: selectEmpNo 실행 :::");
+		   int empNo = 0;
+		    Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			if(str.equals("max")) {
+				sql = "SELECT MAX(emp_no) FROM employees";
+			} else if(str.equals("min")) {
+				sql = "SELECT MIN(emp_no) FROM employees";
+			}
+			try {
+				conn = DBHelper.getConnection();
+				stmt = conn.prepareStatement(sql);
+				rs = stmt.executeQuery();
+				if(rs.next()) {
+					empNo = rs.getInt(1);
+					}
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBHelper.close(rs, stmt, conn);
+			}
+		   return empNo;
+	   }
+	   
+	   // 검색을할때, 시작과 끝을 선택해서 그 리스트를 보여주는 메서드
+	   public List<Employees> selectEmployeesListBetween(int begin, int end) {
+		   System.out.println("::: selectEmployeesListBetween 실행 :::");
+			List<Employees> list = new ArrayList<Employees>();
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			final String sql = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees WHERE emp_no BETWEEN ? AND ? ORDER BY emp_no ASC";
+			
+			try {
+				conn = DBHelper.getConnection();
+				stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, begin);
+				stmt.setInt(2, end);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+						Employees employees = new Employees();
+						employees.setEmpNo(rs.getInt("emp_no"));
+						employees.setBirthDate(rs.getString("birth_date"));
+						employees.setFirstName(rs.getString("first_name"));
+						employees.setLastName(rs.getString("last_name"));
+						employees.setGender(rs.getString("gender"));
+						employees.setHireDate(rs.getString("hire_date"));
+						list.add(employees);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBHelper.close(rs, stmt, conn);
+			}
+			return list;
+		}
+	   
+	   // group by로 성별에 따른 직원 수 리스트
+	   public List<Map<String, Object>> selectEmployeesCountGroupByGender() {
+		   System.out.println("::: selectEmployeesCountGroupByGender 실행 :::");
+		   List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		   Connection conn = null;
+		   PreparedStatement stmt = null;
+		   ResultSet rs = null;
+		   String sql = "SELECT gender, count(gender) as cnt from employees GROUP BY gender";
+		   
+		   try {
+			   conn = DBHelper.getConnection();
+			   stmt = conn.prepareStatement(sql);
+			   rs = stmt.executeQuery();
+			   while(rs.next()) {
+				   Map<String, Object> map = new HashMap<String, Object>();
+				   map.put("gender", rs.getString("gender"));
+				   map.put("cnt", rs.getInt("cnt"));
+				   list.add(map);
+			   }
+			   
+		   } catch(Exception e) {
+			   e.printStackTrace();
+		   } finally {
+			   DBHelper.close(rs, stmt, conn);
+		   }
+		   return list;
+	   }
 	
 	//사원 목록을 정렬해서 보여주는 메소드
 	public List<Employees> selectEmployeesListOrderBy(String order){
@@ -45,8 +135,8 @@ public class EmployeesDao {
 		while(rs.next()) {
 			Employees employees = new Employees();
 			employees.setEmpNo(rs.getInt("emp_no"));
-			employees.setEmpFirstName(rs.getString("first_name"));
-			employees.setEmpLastName(rs.getString("last_name"));
+			employees.setFirstName(rs.getString("first_name"));
+			employees.setLastName(rs.getString("last_name"));
 			employees.setBirthDate(rs.getString("birth_date"));
 			employees.setHireDate(rs.getString("hire_date"));
 			employees.setGender(rs.getString("gender"));
@@ -75,6 +165,7 @@ public class EmployeesDao {
 	
 	// 사원(employees)의 리스트를 가져오는 메소드
 	public List<Employees> selectEmployeesList(int num) {
+		System.out.println("::: selectEmployeesList 실행 :::");
 		// 수를 저장하여 반환 할 변수 
 		int count = 0;
 		// 쿼리 작성 
@@ -87,8 +178,7 @@ public class EmployeesDao {
 		
 		List<Employees> list = new ArrayList<Employees>();
 		
-		try {
-			System.out.println("::: selectEmployeesList 실행 :::");
+		try {			
 		// select 쿼리 를 날릴 것이니까 ResultSet 필요 
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/employees","root","java1234");
@@ -99,8 +189,8 @@ public class EmployeesDao {
 			while(rs.next()) {
 				Employees employees = new Employees();
 				employees.setEmpNo(rs.getInt("emp_no"));
-				employees.setEmpFirstName(rs.getString("first_name"));
-				employees.setEmpLastName(rs.getString("last_name"));
+				employees.setFirstName(rs.getString("first_name"));
+				employees.setLastName(rs.getString("last_name"));
 				employees.setBirthDate(rs.getString("birth_date"));
 				employees.setHireDate(rs.getString("hire_date"));
 				employees.setGender(rs.getString("gender"));
@@ -128,6 +218,7 @@ public class EmployeesDao {
 	
 	// 사원(employees)의 개수를 가져오는 메소드
 	public int selectEmployeesRowCount() {		
+		System.out.println("::: selectEmployeesRowCount 실행 :::");
 		// 수를 저장하여 반환 할 변수 
 		int count = 0;
 		// 쿼리 작성 
