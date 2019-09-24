@@ -7,9 +7,6 @@
 <title>salaries statistics</title>
 </head>
 <body>
-<div class="container">
-<jsp:include page="../naveBar.jsp"></jsp:include>
-</div>
 
 <div class="jumbotron">
 	<div class="container">
@@ -18,7 +15,7 @@
 	</div>
 </div>
 <div class="container">
-
+	<jsp:include page="../naveBar.jsp"></jsp:include>
 	
 	<table class="table table-bordered table-hover table-striped"  style="text-align:center;">
 	<thead>

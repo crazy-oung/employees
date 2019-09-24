@@ -32,8 +32,8 @@
 		<c:forEach var="employees" items="${list}">
 			<tr>			
 				<td>${employees.empNo}</td>
-				<td>${employees.empFirstName}</td>
-				<td>${employees.empLastName}</td>
+				<td>${employees.firstName}</td>
+				<td>${employees.lastName}</td>
 				<td>${employees.birthDate}</td>
 				<td>${employees.gender}</td>
 				<td>${employees.hireDate}</td>

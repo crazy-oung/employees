@@ -14,8 +14,8 @@ import model.EmployeesDao;
 import vo.Employees;
 
 @WebServlet(
-		"/employees/GetEmployeesList")
-public class EmployeesListServlet extends HttpServlet {
+		"/employees/getEmployeesList")
+public class GetEmployeesListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

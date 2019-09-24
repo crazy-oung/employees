@@ -14,8 +14,8 @@ import vo.Employees;
 
 //사원 테이블의 데이터를 정렬해서 보여준 결과를 넘김
 
-@WebServlet("/employees/GetEmployeesListOrderBy")
-public class EmployeesListOrderByServlet extends HttpServlet {
+@WebServlet("/employees/getEmployeesListOrderBy")
+public class GetEmployeesListOrderByServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
