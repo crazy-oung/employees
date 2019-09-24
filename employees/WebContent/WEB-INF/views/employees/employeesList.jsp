@@ -30,7 +30,7 @@
 	<jsp:include page="../naveBar.jsp"></jsp:include>	
 
 	<h4>선택한 개수만큼 출력</h4>	
-	<form action="${pageContext.request.contextPath}/employees/GetEmployeesListServlet" method="get">
+	<form action="${pageContext.request.contextPath}/employees/GetEmployeesList" method="get">
 		<!-- 출력 개수 제한 선택 -->
 		<div class="d-flex">
 		<select name="limit" class="custom-select" style="width:30%">

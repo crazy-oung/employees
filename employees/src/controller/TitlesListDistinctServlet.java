@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.DepartmentsDao;
-import vo.Department;
+import model.EmployeesDao;
+import model.TitlesDao;
+import vo.Employees;
 
-
-@WebServlet("/departments/GetDepartmentsList")
-public class DepartmentsListSevlet extends HttpServlet {
+@WebServlet("/titles/titlesListDistinct")
+public class TitlesListDistinctServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("::: DepartmentsListSevlet 실행 :::");
+		System.out.println("::: TitlesListDistinctServlet 실행 :::");
 		
-		DepartmentsDao departmentDao = new DepartmentsDao();
-		List<Department> list = departmentDao.selectDepartmentsList();
-		
+		TitlesDao titlesDao = new TitlesDao();
+		List<String> list = titlesDao.selectTitlesListDistinct();
+
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/WEB-INF/views/departments/departmentsList.jsp").forward(request, response);;
+		request.getRequestDispatcher("/WEB-INF/views/titles/titlesList.jsp").forward(request, response);
 	}
 
 }
