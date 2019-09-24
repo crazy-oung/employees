@@ -13,8 +13,8 @@ import model.EmployeesDao;
 import model.TitlesDao;
 import vo.Employees;
 
-@WebServlet("/titles/titlesListDistinct")
-public class TitlesListDistinctServlet extends HttpServlet {
+@WebServlet("/titles/getTitlesListDistinct")
+public class GetTitlesListDistinctServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -9,10 +9,6 @@
 </head>
 <body>
 
-<div class="container">
-	<jsp:include page="../naveBar.jsp"></jsp:include>
-</div>
-
 <div class="jumbotron">
 	<div class="container">
 	  	<h1><i class="fas fa-coffee"> TITLE list@!@!</i></h1>
@@ -21,6 +17,7 @@
 </div>
 
 <div class="container">	
+	<jsp:include page="../naveBar.jsp"></jsp:include>
 	<ol>
 		<c:forEach var="titles" items="${list}">
 			<li class="text-dark display-4">		
