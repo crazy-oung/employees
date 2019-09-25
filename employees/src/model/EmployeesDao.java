@@ -14,6 +14,59 @@ import vo.Employees;
 
 public class EmployeesDao {
 	
+	// 사원(employees)의 리스트를 페이지 별로 가져오는 메소드
+	public List<Employees> selectEmployeesListByPage(int currentPage, int rowPerPage) {
+		System.out.println("::: selectEmployeesListByPage 실행 :::");
+		// employees의 행수 저장
+		int count = this.selectEmployeesRowCount();
+		// 쿼리 작성 
+		final String sql = "SELECT emp_no, first_name, last_name, birth_date, hire_date, gender FROM employees limit ?,?";
+		// 디비 연결 필요 
+		Connection conn = null;
+		// 쿼리 저장 필요 
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		List<Employees> list = new ArrayList<Employees>();
+		
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			int startRow = (currentPage-1)*rowPerPage;
+			stmt.setInt(1, startRow);
+			stmt.setInt(2, rowPerPage);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Employees employees = new Employees();
+				employees.setEmpNo(rs.getInt("emp_no"));
+				employees.setFirstName(rs.getString("first_name"));
+				employees.setLastName(rs.getString("last_name"));
+				employees.setBirthDate(rs.getString("birth_date"));
+				employees.setHireDate(rs.getString("hire_date"));
+				employees.setGender(rs.getString("gender"));
+				list.add(employees);	
+			}
+			
+		}catch(Exception e) {
+			// 가져오다 예외 발생시 예외 콘솔창에 출력
+			e.printStackTrace();
+		} finally {
+			//반납
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				
+			}catch(Exception e) {
+				// 반납하다 예외 발생시 예외 콘솔창에 출력
+				e.printStackTrace();
+			}
+		}	
+		
+		return list;
+	}
+	
 	 // 사원의 최대 갯수를 구하는 메소드
 	   public int selectEmpNo(String str) {
 		   System.out.println("::: selectEmpNo 실행 :::");

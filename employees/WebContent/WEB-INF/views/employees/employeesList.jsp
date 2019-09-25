@@ -3,33 +3,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 부트스트랩  -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Bootstrap icons -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>employees List</title>
 </head>
 <body>
+<!-- 페이지 상단 시작 -->
 <div class="jumbotron">
 	<div class="container">
 	  	<h1><i class="fas fa-coffee"> EMP list@!</i></h1>
 	  	<p>employees 샘플 데이터베이스를 사용하여 구현한 웹 프로젝트의 <b class="display-4 font-weight-bold text-success">사원조회</b> 페이지입니다.</p>
 	</div>
-</div>
-
+</div><!-- 페이지 상단 끝 -->
+<!-- 페이지 리스트 -->
+<jsp:include page="../naveBar.jsp"></jsp:include>	
+<!-- 페이지 내용 시작 -->
 <div class="container">
-
-	<jsp:include page="../naveBar.jsp"></jsp:include>	
-
 	<h4>선택한 개수만큼 출력</h4>	
+	<!-- 폼 시작 -->
 	<form action="${pageContext.request.contextPath}/employees/getEmployeesList" method="get">
 		<!-- 출력 개수 제한 선택 -->
 		<div class="d-flex">
@@ -42,7 +44,9 @@
 		<button class="btn btn-warning" type="submit">검색</button>
 		</div>
 	</form>
+	<!-- 폼 끝 -->
 	<hr>
+	<!-- 테이블 시작  -->
 	<table class="table table-bordered table-hover table-striped"  style="text-align:center;">
 	<thead>
 		<tr>
@@ -67,7 +71,8 @@
 		</c:forEach>
 	</tbody>
 	</table>
+	<!-- 테이블 끝 -->
 </div>
-
+<!-- 페이지 내용 끝 -->
 </body>
 </html>
