@@ -32,14 +32,14 @@ public class Employees {
 	public String getLastName() {
 		return lastName;
 	}
-	public void setLastName(String empLastName) {
-		this.lastName = empLastName;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getFirstName() {
 		return firstName;
 	}
-	public void setFirstName(String empFirstName) {
-		this.firstName = empFirstName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	public String getBirthDate() {
 		return birthDate;

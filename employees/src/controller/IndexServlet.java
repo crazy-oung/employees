@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.*;
 
@@ -21,9 +22,19 @@ public class IndexServlet extends HttpServlet {
     private TitlesDao titlesDao;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("::: IndexServlet 실행 :::");
+		
+		//로그인 확인
+		HttpSession session = request.getSession();
+		System.out.println("sessionEmpNo: "+session.getAttribute("sessionEmpNo"));
+		
+		if(session.getAttribute("sessionEmpNo") == null) {
+			response.sendRedirect(request.getContextPath()+"/login");
+			return;
+		}
+		
 		employeesDao = new EmployeesDao();
 		int employeesRowCount = employeesDao.selectEmployeesRowCount();
-		// employeesDao.selectEmployeesRowCount();
       
 		departmentsDao = new DepartmentsDao();
 		int departmentsRowCount = departmentsDao.selectDepartmentsRowCount();
@@ -40,7 +51,7 @@ public class IndexServlet extends HttpServlet {
       	titlesDao = new TitlesDao();
       	int titlesRowCount = titlesDao.selectTitlesRowCount();
       
-      	System.out.println("::: IndexServlet 실행 :::");
+      	
       	System.out.println("emp테이블의 총 갯수 : " + employeesRowCount);
       
       	System.out.println("departments테이블의 총 갯수 : " + departmentsRowCount);
@@ -57,7 +68,7 @@ public class IndexServlet extends HttpServlet {
       	request.setAttribute("salariesRowCount", salariesRowCount);
       	request.setAttribute("titlesRowCount", titlesRowCount);
       
-      	// request와 response를 받아서 index.jsp로 포워딩
+      	// request와 response를 받아서 index.jsp로 포워딩 
       	request.getRequestDispatcher("./WEB-INF/views/index.jsp").forward(request, response);
 
 	}

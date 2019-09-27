@@ -9,14 +9,14 @@ public class DeptEmp {
 	public Employees getEmployees() {
 		return employees;
 	}
-	public void setEmployees(Employees employees) {
-		this.employees = employees;
+	public void setEmployees() {
+		this.employees = new Employees();
 	}
 	public Department getDepartment() {
 		return department;
 	}
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setDepartment() {
+		this.department = new Department();
 	}
 	public String getFromDate() {
 		return fromDate;

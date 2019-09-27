@@ -14,6 +14,54 @@ import vo.Employees;
 
 public class EmployeesDao {
 	
+	// 사원(employees)의 이름과 사번을 받아서 로그인 
+	public int login(Employees employees) {
+		System.out.println("::: login 실행 :::");
+		// employees의 행수 저장
+		int sessionEmpNo=0;
+		// 쿼리 작성 
+		final String sql = "SELECT emp_no, first_name, last_name FROM employees group by emp_no having first_name=? and last_name=? and emp_no=?";
+		// 디비 연결 필요 
+		Connection conn = null;
+		// 쿼리 저장 변수
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		//받은 값 확인
+		System.out.println(employees.getFirstName()+employees.getEmpNo()+employees.getLastName());
+		
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			// 변동 값 대입 
+			stmt.setString(1,employees.getFirstName());
+			stmt.setString(2,employees.getLastName());
+			stmt.setInt(3,employees.getEmpNo());
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				sessionEmpNo = rs.getInt("emp_no");
+				System.out.println("sessionEmpNo: "+sessionEmpNo);
+			}
+			
+		}catch(Exception e) {
+			// 가져오다 예외 발생시 예외 콘솔창에 출력
+			e.printStackTrace();
+		} finally {
+			//반납
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+				
+			}catch(Exception e) {
+				// 반납하다 예외 발생시 예외 콘솔창에 출력
+				e.printStackTrace();
+			}
+		}	
+		
+		return sessionEmpNo;
+	}
+	
 	// 사원(employees)의 리스트를 페이지 별로 가져오는 메소드
 	public List<Employees> selectEmployeesListByPage(int currentPage, int rowPerPage) {
 		System.out.println("::: selectEmployeesListByPage 실행 :::");
@@ -67,94 +115,94 @@ public class EmployeesDao {
 		return list;
 	}
 	
-	 // 사원의 최대 갯수를 구하는 메소드
-	   public int selectEmpNo(String str) {
+	// 사원의 최대 갯수를 구하는 메소드
+   public int selectEmpNo(String str) {
 		   System.out.println("::: selectEmpNo 실행 :::");
-		   int empNo = 0;
-		    Connection conn = null;
-			PreparedStatement stmt = null;
-			ResultSet rs = null;
-			String sql = null;
-			if(str.equals("max")) {
-				sql = "SELECT MAX(emp_no) FROM employees";
-			} else if(str.equals("min")) {
-				sql = "SELECT MIN(emp_no) FROM employees";
-			}
-			try {
-				conn = DBHelper.getConnection();
-				stmt = conn.prepareStatement(sql);
-				rs = stmt.executeQuery();
-				if(rs.next()) {
-					empNo = rs.getInt(1);
-					}
-			} catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				DBHelper.close(rs, stmt, conn);
-			}
-		   return empNo;
-	   }
-	   
-	   // 검색을할때, 시작과 끝을 선택해서 그 리스트를 보여주는 메서드
-	   public List<Employees> selectEmployeesListBetween(int begin, int end) {
-		   System.out.println("::: selectEmployeesListBetween 실행 :::");
-			List<Employees> list = new ArrayList<Employees>();
-			Connection conn = null;
-			PreparedStatement stmt = null;
-			ResultSet rs = null;
-			final String sql = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees WHERE emp_no BETWEEN ? AND ? ORDER BY emp_no ASC";
-			
-			try {
-				conn = DBHelper.getConnection();
-				stmt = conn.prepareStatement(sql);
-				stmt.setInt(1, begin);
-				stmt.setInt(2, end);
-				rs = stmt.executeQuery();
-				while(rs.next()) {
-						Employees employees = new Employees();
-						employees.setEmpNo(rs.getInt("emp_no"));
-						employees.setBirthDate(rs.getString("birth_date"));
-						employees.setFirstName(rs.getString("first_name"));
-						employees.setLastName(rs.getString("last_name"));
-						employees.setGender(rs.getString("gender"));
-						employees.setHireDate(rs.getString("hire_date"));
-						list.add(employees);
-				}
-			} catch(Exception e) {
-				e.printStackTrace();
-			} finally {
-				DBHelper.close(rs, stmt, conn);
-			}
-			return list;
+	   int empNo = 0;
+	    Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		if(str.equals("max")) {
+			sql = "SELECT MAX(emp_no) FROM employees";
+		} else if(str.equals("min")) {
+			sql = "SELECT MIN(emp_no) FROM employees";
 		}
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				empNo = rs.getInt(1);
+				}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(rs, stmt, conn);
+		}
+	   return empNo;
+   }
 	   
-	   // group by로 성별에 따른 직원 수 리스트
-	   public List<Map<String, Object>> selectEmployeesCountGroupByGender() {
-		   System.out.println("::: selectEmployeesCountGroupByGender 실행 :::");
-		   List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		   Connection conn = null;
-		   PreparedStatement stmt = null;
-		   ResultSet rs = null;
-		   String sql = "SELECT gender, count(gender) as cnt from employees GROUP BY gender";
-		   
-		   try {
-			   conn = DBHelper.getConnection();
-			   stmt = conn.prepareStatement(sql);
-			   rs = stmt.executeQuery();
-			   while(rs.next()) {
-				   Map<String, Object> map = new HashMap<String, Object>();
-				   map.put("gender", rs.getString("gender"));
-				   map.put("cnt", rs.getInt("cnt"));
-				   list.add(map);
-			   }
-			   
-		   } catch(Exception e) {
-			   e.printStackTrace();
-		   } finally {
-			   DBHelper.close(rs, stmt, conn);
+   // 검색을할때, 시작과 끝을 선택해서 그 리스트를 보여주는 메서드
+   public List<Employees> selectEmployeesListBetween(int begin, int end) {
+	   System.out.println("::: selectEmployeesListBetween 실행 :::");
+		List<Employees> list = new ArrayList<Employees>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		final String sql = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees WHERE emp_no BETWEEN ? AND ? ORDER BY emp_no ASC";
+		
+		try {
+			conn = DBHelper.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, begin);
+			stmt.setInt(2, end);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+					Employees employees = new Employees();
+					employees.setEmpNo(rs.getInt("emp_no"));
+					employees.setBirthDate(rs.getString("birth_date"));
+					employees.setFirstName(rs.getString("first_name"));
+					employees.setLastName(rs.getString("last_name"));
+					employees.setGender(rs.getString("gender"));
+					employees.setHireDate(rs.getString("hire_date"));
+					list.add(employees);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBHelper.close(rs, stmt, conn);
+		}
+		return list;
+	}
+   
+   	// group by로 성별에 따른 직원 수 리스트
+   	public List<Map<String, Object>> selectEmployeesCountGroupByGender() {
+	   System.out.println("::: selectEmployeesCountGroupByGender 실행 :::");
+	   List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+	   Connection conn = null;
+	   PreparedStatement stmt = null;
+	   ResultSet rs = null;
+	   String sql = "SELECT gender, count(gender) as cnt from employees GROUP BY gender";
+	   
+	   try {
+		   conn = DBHelper.getConnection();
+		   stmt = conn.prepareStatement(sql);
+		   rs = stmt.executeQuery();
+		   while(rs.next()) {
+			   Map<String, Object> map = new HashMap<String, Object>();
+			   map.put("gender", rs.getString("gender"));
+			   map.put("cnt", rs.getInt("cnt"));
+			   list.add(map);
 		   }
-		   return list;
+		   
+	   } catch(Exception e) {
+		   e.printStackTrace();
+	   } finally {
+		   DBHelper.close(rs, stmt, conn);
 	   }
+	   return list;
+   	}
 	
 	//사원 목록을 정렬해서 보여주는 메소드
 	public List<Employees> selectEmployeesListOrderBy(String order){

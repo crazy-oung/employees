@@ -33,11 +33,23 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <div class="container">		
 	<!-- 직책 종류 리스트 출력 시작  -->
 	<ol>
-		<c:forEach var="titles" items="${list}">
-			<li class="text-dark display-4">		
-				${titles}
-			</li>
-		</c:forEach>
+		<table class="table table-hover table-stripped">
+			<tr>
+				<th>번호</th>
+				<th>부서명</th>
+			</tr>
+			<tr>
+				<c:forEach var="titles" items="${list}">
+					<tr>
+						<td>
+							<li class="text-dark display-4">		
+								${titles}
+							</li>
+						</td>					
+					<tr>
+				</c:forEach>
+			</tr>
+		</table>
 	</ol>
 	<!-- 직책 종류 리스트 출력 끝  -->
 </div>

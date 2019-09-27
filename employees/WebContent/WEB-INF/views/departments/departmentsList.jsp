@@ -23,7 +23,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <div class="jumbotron">
 	<div class="container">
 	  	<h1><i class="fas fa-coffee"> DEPT list@!</i></h1>
-	  	<p>employees 샘플 데이터베이스를 사용하여 구현한 웹 프로젝트의 <b class="display-4 font-weight-bold text-primary">부서조회</b> 페이지입니다.</p>
+	  	<p>employees 샘플 데이터베이스를 사용하여 구현한 웹 프로젝트의 <b class="display-4 font-weight-bold text-info">부서조회</b> 페이지입니다.</p>
 	</div>
 </div><!-- 페이지 상단 끝 -->
 <!-- 페이지 리스트 -->
