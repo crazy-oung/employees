@@ -19,26 +19,26 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 <meta charset="UTF-8">
 <title>Login Page</title>
 </head>
-<body>
+<body class="bg-light" style="padding-top:10%">
 <!-- 페이지 상단 시작 -->
-<div class="jumbotron">
+<div class="jumbotron" >
 	<div class="container" align="center">
-	  	<h1 class="display-3"><i class="fas fa-cloud"> EMS LOGIN</i></h1>
+	  	<h1 class="display-3"><i class="fas fa-cloud"> HRMS LOGIN</i></h1>
 	  	<hr>
-	  	<b>Employees Management System Login</b>
+	  	<b>Human Resource Management System LOGIN</b>
 	  	<hr>
 	  	<!-- 로그인 폼 시작 -->
 	  	<form method="post" action="${pageContext.request.contextPath}/login">
 	  		<!-- 정보 입력 -->
 		  	<div class="d-flex justify-content-center" >
 		  		<div><!-- 이름 받기 -->
-		  			<b>이름(first name)</b><input name="firstName" class="form-control">
+		  			<b>이름(first name)</b><input name="firstName" class="form-control" value="Georgi">
 		  		</div><!-- 이름 끝 -->
 		  		<div><!-- 성 받기 -->
-		  			 <b>성(last name)</b><input name="lastName" class="form-control">
+		  			 <b>성(last name)</b><input name="lastName" class="form-control" value="Facello">
 		  		</div><!-- 성 끝 -->
 		  		<div><!-- 사번 받기 -->
-		  			<B>사번(emp no)</B><input name="sessionEmpNo" class="form-control">
+		  			<B>사번(emp no)</B><input name="sessionEmpNo" class="form-control" value="10001">
 		  		</div><!-- 사번 끝 -->
 	  		</div><!-- 정보 입력 끝 -->
 	  		<hr>

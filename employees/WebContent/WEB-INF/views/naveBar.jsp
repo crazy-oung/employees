@@ -52,7 +52,7 @@
 		</li><!-- 부서사원 조회 끝 -->
 		<!-- 부장 조회 -->
 		<li class="nav-item">
-			<a class="nav-link disabled" href="#">부장조회</a>
+			<a class="nav-link text-primary" href="${pageContext.request.contextPath}/departmentManager/getDeptManagerList"><b>부장</b>조회</a>
 		</li><!-- 부장 조회 끝 -->
 		<!-- 연봉 조회 -->
 		<li class="nav-item">
@@ -64,10 +64,10 @@
 				<a class="nav-link text-dark font-weight-bold" href="${pageContext.request.contextPath}/logout">로그아웃</a>
 			</li>
 		</c:if><!-- 로그아웃 끝-->
-		<!-- 구현예정항목 안내 -->
+		<!--  구현예정항목 안내 
 		<li class="nav-item">
 			<a class="nav-link disabled text-ligth font-italic text-secondary small">구현예정항목 disabled</a>
-		</li>	  
+		</li> -->	  
 	</ul>
 <hr>
 

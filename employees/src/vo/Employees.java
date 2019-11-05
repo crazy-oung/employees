@@ -8,7 +8,15 @@ public class Employees {
 	private String birthDate;
 	private String hireDate;
 	private String gender;
-	
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	@Override
 	public String toString() {

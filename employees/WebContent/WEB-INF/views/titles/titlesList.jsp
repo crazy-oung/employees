@@ -35,7 +35,6 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 	<ol>
 		<table class="table table-hover table-stripped">
 			<tr>
-				<th>번호</th>
 				<th>부서명</th>
 			</tr>
 			<tr>
@@ -45,7 +44,7 @@ integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zF
 							<li class="text-dark display-4">		
 								${titles}
 							</li>
-						</td>					
+						</td>							
 					<tr>
 				</c:forEach>
 			</tr>
